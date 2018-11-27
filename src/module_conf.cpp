@@ -23,23 +23,6 @@ void conf_SaveSettings(void)
     mqtt["user"]      = settings.mqtt.user;
     mqtt["password"]  = settings.mqtt.password;
 
-    // ButtonSettings
-    JsonArray& button = root.createNestedArray("button");
-    for(int i=0; i<MAX_BUTTONS; i++) {
-        JsonObject& node        = button.createNestedObject();
-        node["name"]            = settings.button[i].name;
-        node["toggle_relay_id"] = settings.button[i].toggle_relay_id;
-    }
-
-    // RelaySettings
-    JsonArray& relay = root.createNestedArray("relay");
-    for(int i=0; i<MAX_RELAYS; i++) {
-        JsonObject& node        = relay.createNestedObject();
-        node["name"]            = settings.relay[i].name;
-        node["default_state"]   = settings.relay[i].default_state;
-        node["is_persistent"]   = settings.relay[i].is_persistent;
-    }
-
     File file = SPIFFS.open("/settings.json", "w");
     if (!file) {
         Log.error("CONF: Cannot open 'settings.json' for writing");
@@ -65,8 +48,6 @@ void conf_LoadSettings(void)
     JsonObject& jsonSettings = jsonBuffer.parseObject(file);
 
     conf_SettingsFromJsonObject(jsonSettings);
-
-
 }
 
 void conf_SettingsFromJsonObject(JsonObject &jsonSettings) {
@@ -124,51 +105,6 @@ void conf_SettingsFromJsonObject(JsonObject &jsonSettings) {
             strncpy(settings.mqtt.password, jsonMQTTSettings["password"], sizeof(settings.mqtt.password));
         }
     }
-
-    // RelaySettings - Array
-    if (jsonSettings.containsKey("relay")) {
-        JsonArray& jsonRelaySettingsArray = jsonSettings["relay"];
-
-        // RelaySettings
-        for(uint i=0; i < jsonRelaySettingsArray.size(); i++) {
-            JsonObject& jsonRelaySettings = jsonRelaySettingsArray[i];
-
-            // RelaySettings / name
-            if (jsonRelaySettings.containsKey("name")) {
-                strncpy(settings.relay[i].name, jsonRelaySettings["name"], sizeof(settings.relay[i].name));
-            }
-
-            // RelaySettings / default_state
-            if (jsonRelaySettings.containsKey("default_state")) {
-                settings.relay[i].default_state = jsonRelaySettings["default_state"];
-            }
-
-            // RelaySettings / is_persistent
-            if (jsonRelaySettings.containsKey("is_persistent")) {
-                settings.relay[i].is_persistent = jsonRelaySettings["is_persistent"];
-            }
-        }
-    }
-
-    // ButtonSettings - Array
-    if (jsonSettings.containsKey("button")) {
-        JsonArray& jsonButtonSettingsArray = jsonSettings["button"];
-
-        // ButtonSettings
-        for(uint i=0; i < jsonButtonSettingsArray.size(); i++) {
-            JsonObject& jsonButtonSettings = jsonButtonSettingsArray[i];
-
-            // ButtonSettings / name
-            if (jsonButtonSettings.containsKey("name")) {
-                strncpy(settings.button[i].name, jsonButtonSettings["name"], sizeof(settings.button[i].name));
-            }
-
-            // ButtonSettings / toggle_relay_id
-            if (jsonButtonSettings.containsKey("toggle_relay_id")) {
-                settings.button[i].toggle_relay_id = jsonButtonSettings["toggle_relay_id"];
-            }
-        }
-    }
 }
 
 void conf_FactoryReset() {
@@ -181,8 +117,6 @@ void conf_FactoryReset() {
     sprintf(factorySettings.mqtt.client_id  , "arduino-%08X", ESP.getChipId());
     sprintf(factorySettings.mqtt.topic      , "arduino-%08X", ESP.getChipId());
     
-
-
     settings = factorySettings;
     conf_SaveSettings();
 }
