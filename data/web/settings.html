@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Arduino Control Center</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/bulma.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container" style="margin-bottom: 20px">
+                <div class="tabs">
+                    <ul>
+                        <li :class="(activeTab == 1)?'is-active':''" @click="activeTab = 1"><a>Network</a></li>
+                        <li :class="(activeTab == 2)?'is-active':''" @click="activeTab = 2"><a>MQTT</a></li>
+                    </ul>
+
+                    <button class="button is-primary" @click="saveSettings">Update Setting</button>
+                </div>
+            </div>
+            
+            <!-- Network -->
+            <div class="container" v-show="activeTab == 1">
+                <div v-if="settings.network && settings.network.ssid" class="field">
+                    <label class="label">Wi-Fi SSID</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.network.ssid" />
+                    </div>
+                </div>
+
+                <div v-if="settings.network && settings.network.password" class="field">
+                    <label class="label">Wi-Fi Password</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.network.password" />
+                    </div>
+                </div>
+                <div v-if="settings.network && settings.network.hostname" class="field">
+                    <label class="label">Hostname</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.network.hostname" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- MQTT -->
+            <div class="container" v-show="activeTab == 2">
+                <div v-if="settings.mqtt && settings.mqtt.broker" class="field">
+                    <label class="label">MQTT Broker</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.mqtt.broker" />
+                    </div>
+                </div>
+
+                <div v-if="settings.mqtt && settings.mqtt.hasOwnProperty('client_id')" class="field">
+                    <label class="label">Client ID</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.mqtt.client_id" />
+                    </div>
+                </div>
+
+                <div v-if="settings.mqtt && settings.mqtt.hasOwnProperty('user')" class="field">
+                    <label class="label">User</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.mqtt.user" />
+                    </div>
+                </div>
+
+                <div v-if="settings.mqtt && settings.mqtt.hasOwnProperty('password')" class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.mqtt.password" />
+                    </div>
+                </div>
+
+                <div v-if="settings.mqtt && settings.mqtt.hasOwnProperty('topic')" class="field">
+                    <label class="label">Topic</label>
+                    <div class="control">
+                        <input class="input" type="text"  v-model="settings.mqtt.topic" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+        
+    <script src="js/settings.js"></script>
+</body>
+</html>

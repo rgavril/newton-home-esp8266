@@ -1,0 +1,159 @@
+{
+  "network": {
+    "ssid": "Razvan's Wi-Fi Network",
+    "password": "internet82",
+    "hostname": "arduino-testing"
+  },
+  "mqtt": {
+    "server": "10.0.1.7",
+    "port": "1883",
+    "client_id": "arduino",
+    "topic": "arduino",
+    "user": "",
+    "password": ""
+  },
+  "button": [
+    {
+      "name": "Baie Oaspeti S1",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Hol Dormitor",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Intrare",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Perete Dining S4",
+      "toggle_relay_id": 1
+    },
+    {
+      "name": "Baie Oaspeti S3",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Balcon",
+      "toggle_relay_id": 0
+    },
+    {
+      "name": "Baie Dormitor S1",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Birou",
+      "toggle_relay_id": 4
+    },
+    {
+      "name": "Dressing",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Perete Dining S2",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Baie Dormitor S2",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Baie Oaspeti S2",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Perete Dining S3",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Perete Dining S1",
+      "toggle_relay_id": -1
+    },
+    {
+      "name": "Dormitor",
+      "toggle_relay_id": -1
+    }
+  ],
+  "relay": [
+    {
+      "name": "Lumina Balcon",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Masa Dining",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Dormitor",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Hol Dormitor",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Birou",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Hue Lights",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Spoturi Dining/Living",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Dressing",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Intrare",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Ventilator Baie Dormitor",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Baie Dormitor",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Ventilator Baie Oaspeti",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Lumina Baie Oaspeti",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Neutilizat 1",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Neutilizat 2",
+      "default_state": false,
+      "is_persistent": true
+    },
+    {
+      "name": "Yala Usa Intrare",
+      "default_state": false,
+      "is_persistent": true
+    }
+  ]
+}
