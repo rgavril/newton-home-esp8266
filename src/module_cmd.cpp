@@ -143,32 +143,10 @@ void cmd_RelaySet(int relayId, bool state) {
     Serial.println((String) "\n@RELAY_SET " + relayId + " " + state);
 }
 
-/**
- * @brief Request the state of a relay from Arduino. This serial command
- * will trigger a reply with @RELAY_NOTIFY from Arduino.
- * 
- * @param relayId  id of the relay we want to receive state notify
- * 
- * @RELAY_GET <relayId>
- */
-void cmd_RelayGet(int relayId) {
-    Serial.println((String) "\n@RELAY_GET " + relayId);
-}
 void cmd_RelaysGet(void) {
     Serial.println((String) "\n@RELAYS_GET");
 }
 
-/**
- * @brief Request the state of a relay from Arduino. This serial command
- * will trigger a reply with @SENSOR_NOTIFY from Arduino.
- * 
- * @param sensorId  id of the relay we want to receive state notify
- * 
- * @SENSOR_GET <sensorId>
- */
-void cmd_SensorGet(int sensorId) {
-    Serial.println((String) "\n@SENSOR_GET " + sensorId);
-}
 void cmd_SensorsGet(void) {
     Serial.println((String) "\n@SENSORS_GET");
 }
