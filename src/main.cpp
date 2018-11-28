@@ -17,7 +17,8 @@ bool       sensorState[MAX_SENSORS];
 void setup() {
     // Serial
     Serial.begin(115200);
-
+    Serial.setRxBufferSize(512);
+    
     // Filesystem
     SPIFFS.begin();
     
@@ -45,6 +46,7 @@ void setup() {
 
     // MDNS
     if (MDNS.begin(settings.network.hostname)) {
+        MDNS.addService("http", "tcp", 80);
         Log.notice("MDNS reponder started");
 	}
 
