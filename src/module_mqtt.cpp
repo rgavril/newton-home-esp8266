@@ -14,11 +14,29 @@ void mqtt_setup(void) {
 }
 
 void mqtt_loop(void) {
-    mqttClient.loop();
-    
+    static unsigned long disconnectTime = 0;
+    static bool disconnectFlag = false;
+
     if (!mqttClient.connected()) {
+        if (disconnectFlag == false) {
+            disconnectFlag = true;
+            disconnectTime = millis();
+            Log.warning("MQTT: Connection was dropped, will reconnect if not recovered in 1 sec");
+        }
+    } else {
+        if (disconnectFlag == true) {
+            Log.notice("MQTT: Connection recovered");
+            disconnectFlag = false;
+        }
+    }
+
+    if (!mqttClient.connected() && disconnectFlag && millis() - disconnectTime > 1000) {
+        Log.warning("Connection dropped for more that 1 second, will try reconnect.");
+        disconnectTime = millis();
         mqtt_Connect();
     }
+
+    mqttClient.loop();
 }
 
 /**
@@ -42,7 +60,7 @@ void mqtt_Connect(void) {
     }
     Log.notice("MQTT: Successfully connected to broker");
 
-    mqttClient.subscribe((String) settings.mqtt.topic + "/cmd/#");
+    mqttClient.subscribe((String) settings.mqtt.topic + "/cmd/#", 2);
 
     for (int i = 0; i < MAX_RELAYS; i++) {
         mqtt_statRelay(i, relayState[i]);

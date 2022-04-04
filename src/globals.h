@@ -8,7 +8,7 @@
 #include <ArduinoJson.h>
 
 #define MAX_RELAYS 16
-#define MAX_SENSORS 2
+#define MAX_SENSORS 4
 #define MAX_BUTTONS 15
 
 

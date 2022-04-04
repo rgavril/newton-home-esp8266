@@ -2,7 +2,21 @@ var app = new Vue({
     el: '#app',
     data: {
         activeTab: 1,
-        settings: []
+        settings: {
+            "network": {
+                "ssid"    : "Razvan's Wi-Fi Network",
+                "password": "test data",
+                "hostname": "arduino-000471FE"
+            },
+            "mqtt": {
+                "broker": "10.0.1.7",
+                "port": "1883",
+                "client_id": "arduino-000471FE",
+                "topic": "arduino-000471FE",
+                "user": "",
+                "password": ""
+            }
+        }
     },
     
     methods: {

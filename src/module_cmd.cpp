@@ -67,7 +67,7 @@ void cmd_onSensorNotify(void) {
 
     Log.notice("CMD: Setting sensor %d to %d ( @SENSOR_NOTIFY %s %s )", sensorId, state, arg1, arg2);
 
-    relayState[sensorId] = state;
+    sensorState[sensorId] = state;
     mqtt_statSensor(sensorId, state);
 }
 
